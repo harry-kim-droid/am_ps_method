@@ -11,7 +11,7 @@ if ($status) {
 }
 
 git commit --allow-empty -m "Trigger Codex PR review after billing update"
-git push
+git push origin HEAD:codex/test-pr-workflow
 
 Write-Host ""
 Write-Host "Triggered Codex PR Review on the open test PR."

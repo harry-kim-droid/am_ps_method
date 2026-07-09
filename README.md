@@ -62,6 +62,7 @@ Team:
 - [docs/install-guide.md](docs/install-guide.md): customer repository installation guide
 - [docs/onboarding-checklist.md](docs/onboarding-checklist.md): setup checklist
 - [docs/operations-playbook.md](docs/operations-playbook.md): weekly operating process
+- [docs/troubleshooting.md](docs/troubleshooting.md): GitHub Actions, quota, and setup failure guide
 - [docs/outreach-script.md](docs/outreach-script.md): messages for finding pilot customers
 - [docs/unit-economics.md](docs/unit-economics.md): pricing, time budget, and margin guardrails
 - [scripts/install-codex-review-kit.ps1](scripts/install-codex-review-kit.ps1): installer for copying workflow files into a customer repo

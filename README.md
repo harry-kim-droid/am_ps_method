@@ -66,6 +66,7 @@ Team:
 - [docs/outreach-script.md](docs/outreach-script.md): messages for finding pilot customers
 - [docs/unit-economics.md](docs/unit-economics.md): pricing, time budget, and margin guardrails
 - [scripts/install-codex-review-kit.ps1](scripts/install-codex-review-kit.ps1): installer for copying workflow files into a customer repo
+- [scripts/trigger-codex-review-test.ps1](scripts/trigger-codex-review-test.ps1): helper to rerun the test PR workflow after billing fixes
 - [templates/pr-review-prompt.md](templates/pr-review-prompt.md): Codex PR review prompt
 - [templates/weekly-tech-debt-prompt.md](templates/weekly-tech-debt-prompt.md): Codex weekly report prompt
 - [templates/weekly-tech-debt-report.md](templates/weekly-tech-debt-report.md): report template

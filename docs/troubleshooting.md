@@ -96,3 +96,9 @@ What to check:
 4. Confirm the `post-feedback` job runs.
 5. Confirm a useful PR comment appears.
 6. Save the run URL and PR comment URL as pilot evidence.
+
+After fixing OpenAI billing or quota, trigger a fresh run from the test branch:
+
+```powershell
+.\scripts\trigger-codex-review-test.ps1
+```

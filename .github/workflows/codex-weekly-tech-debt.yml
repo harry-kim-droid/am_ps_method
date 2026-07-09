@@ -23,7 +23,7 @@ jobs:
         uses: openai/codex-action@v1
         with:
           openai-api-key: ${{ secrets.OPENAI_API_KEY }}
-          model: gpt-5.4-mini
+          model: ${{ vars.CODEX_MODEL || 'gpt-5.4-mini' }}
           prompt-file: .github/codex/prompts/weekly-tech-debt.md
           output-file: weekly-tech-debt-report.md
           sandbox: read-only

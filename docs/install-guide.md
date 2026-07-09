@@ -67,6 +67,8 @@ Edit the prompt files in the customer's repository:
 - `.github/codex/prompts/pr-review.md`
 - `.github/codex/prompts/weekly-tech-debt.md`
 
+Optionally set a repository variable named `CODEX_MODEL` to choose the model used by both workflows. If it is not set, the workflows use `gpt-5.4-mini` for lower-cost pilot runs.
+
 Add customer-specific priorities such as:
 
 - Payment risk

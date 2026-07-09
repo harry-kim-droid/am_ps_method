@@ -26,7 +26,7 @@ What to check:
 
 Mitigation:
 
-- Use `model: gpt-5.4-mini` for pilots and tests.
+- Use the default `gpt-5.4-mini` pilot model, or set the repository variable `CODEX_MODEL` to a model available to the customer's OpenAI project.
 - Keep prompts short for the first validation run.
 - Run only one test pull request at a time.
 - Ask the customer to confirm billing before installation if they provide their own API key.

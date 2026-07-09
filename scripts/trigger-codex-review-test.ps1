@@ -13,6 +13,12 @@ if ($status) {
 git commit --allow-empty -m "Trigger Codex PR review after billing update"
 git push origin HEAD:codex/test-pr-workflow
 
+$originUrl = (git remote get-url origin).Trim()
+$repoSlug = $originUrl
+if ($repoSlug -match "github\.com[:/](.+?)(\.git)?$") {
+    $repoSlug = $Matches[1] -replace "\.git$", ""
+}
+
 Write-Host ""
 Write-Host "Triggered Codex PR Review on the open test PR."
-Write-Host "Check: https://github.com/harry-kim-droid/am_ps_method/actions"
+Write-Host "Check: https://github.com/$repoSlug/actions"

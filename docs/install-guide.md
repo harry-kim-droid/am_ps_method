@@ -48,6 +48,8 @@ Overwrite existing automation files:
 5. Manually run `Codex Weekly Tech Debt Report` from the Actions tab.
 6. Download the generated artifact and verify the report before sending it to the customer.
 
+If the workflow fails, use `docs/troubleshooting.md` before retrying repeatedly.
+
 ## Pilot Defaults
 
 Use these defaults for the first customer:
@@ -64,6 +66,8 @@ Edit the prompt files in the customer's repository:
 
 - `.github/codex/prompts/pr-review.md`
 - `.github/codex/prompts/weekly-tech-debt.md`
+
+Optionally set a repository variable named `CODEX_MODEL` to choose the model used by both workflows. If it is not set, the workflows use `gpt-5.4-mini` for lower-cost pilot runs.
 
 Add customer-specific priorities such as:
 

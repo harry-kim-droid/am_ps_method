@@ -13,12 +13,31 @@ if ($status) {
 git commit --allow-empty -m "Trigger Codex PR review after billing update"
 git push origin HEAD:codex/test-pr-workflow
 
-$originUrl = (git remote get-url origin).Trim()
-$repoSlug = $originUrl
-if ($repoSlug -match "github\.com[:/](.+?)(\.git)?$") {
-    $repoSlug = $Matches[1] -replace "\.git$", ""
+function Get-ActionsUrlFromRemote {
+    param([Parameter(Mandatory = $true)][string] $RemoteUrl)
+
+    if ($RemoteUrl -match "^git@([^:]+):(.+?)(\.git)?$") {
+        return "https://$($Matches[1])/$($Matches[2] -replace '\.git$', '')/actions"
+    }
+
+    if ($RemoteUrl -match "^ssh://git@([^/]+)/(.+?)(\.git)?$") {
+        return "https://$($Matches[1])/$($Matches[2] -replace '\.git$', '')/actions"
+    }
+
+    if ($RemoteUrl -match "^https?://([^/]+)/(.+?)(\.git)?$") {
+        return "https://$($Matches[1])/$($Matches[2] -replace '\.git$', '')/actions"
+    }
+
+    return $null
 }
+
+$originUrl = (git remote get-url origin).Trim()
+$actionsUrl = Get-ActionsUrlFromRemote -RemoteUrl $originUrl
 
 Write-Host ""
 Write-Host "Triggered Codex PR Review on the open test PR."
-Write-Host "Check: https://github.com/$repoSlug/actions"
+if ($actionsUrl) {
+    Write-Host "Check: $actionsUrl"
+} else {
+    Write-Host "Check the Actions page for remote: $originUrl"
+}

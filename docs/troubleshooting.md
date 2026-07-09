@@ -108,3 +108,5 @@ The helper uses the current branch by default. To require a specific branch name
 ```powershell
 .\scripts\trigger-codex-review-test.ps1 -TargetBranch "pilot/codex-review-test"
 ```
+
+The helper refuses protected branch names such as `main` and `master` by default. Use a test PR branch unless you intentionally pass `-AllowProtectedBranch`.

@@ -10,6 +10,13 @@ if ($status) {
     throw "Working tree is not clean. Commit or stash changes before triggering a test run."
 }
 
+git fetch origin codex/test-pr-workflow
+$localHead = (git rev-parse HEAD).Trim()
+$remoteHead = (git rev-parse origin/codex/test-pr-workflow).Trim()
+if ($localHead -ne $remoteHead) {
+    throw "Local branch is not exactly synced with origin/codex/test-pr-workflow. Refusing to push extra local history."
+}
+
 git commit --allow-empty -m "Trigger Codex PR review after billing update"
 git push origin HEAD:codex/test-pr-workflow
 

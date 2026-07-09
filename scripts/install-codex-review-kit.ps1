@@ -16,7 +16,8 @@ $requiredSourceFiles = @(
     ".github/workflows/codex-pr-review.yml",
     ".github/workflows/codex-weekly-tech-debt.yml",
     ".github/codex/prompts/pr-review.md",
-    ".github/codex/prompts/weekly-tech-debt.md"
+    ".github/codex/prompts/weekly-tech-debt.md",
+    "docs/troubleshooting.md"
 )
 
 foreach ($relativePath in $requiredSourceFiles) {

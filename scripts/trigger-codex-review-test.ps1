@@ -19,6 +19,7 @@ if ($localHead -ne $remoteHead) {
 
 git commit --allow-empty -m "Trigger Codex PR review after billing update"
 git push origin HEAD:codex/test-pr-workflow
+git fetch origin codex/test-pr-workflow
 
 function Get-ActionsUrlFromRemote {
     param([Parameter(Mandatory = $true)][string] $RemoteUrl)

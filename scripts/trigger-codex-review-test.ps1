@@ -1,8 +1,24 @@
+[CmdletBinding()]
+param(
+    [string] $TargetBranch
+)
+
 $ErrorActionPreference = "Stop"
+if (Get-Variable -Name PSNativeCommandUseErrorActionPreference -ErrorAction SilentlyContinue) {
+    $PSNativeCommandUseErrorActionPreference = $false
+}
 
 $branch = (git branch --show-current).Trim()
-if ($branch -ne "codex/test-pr-workflow") {
-    throw "Run this from the codex/test-pr-workflow branch. Current branch: $branch"
+if (-not $branch) {
+    throw "Run this from a named branch, not a detached HEAD."
+}
+
+if (-not $TargetBranch) {
+    $TargetBranch = $branch
+}
+
+if ($branch -ne $TargetBranch) {
+    throw "Run this from the $TargetBranch branch. Current branch: $branch"
 }
 
 $status = git status --short
@@ -10,16 +26,20 @@ if ($status) {
     throw "Working tree is not clean. Commit or stash changes before triggering a test run."
 }
 
-git fetch origin codex/test-pr-workflow
+git fetch origin $TargetBranch
 $localHead = (git rev-parse HEAD).Trim()
-$remoteHead = (git rev-parse origin/codex/test-pr-workflow).Trim()
+$remoteHead = (git rev-parse "origin/$TargetBranch").Trim()
 if ($localHead -ne $remoteHead) {
-    throw "Local branch is not exactly synced with origin/codex/test-pr-workflow. Refusing to push extra local history."
+    throw "Local branch is not exactly synced with origin/$TargetBranch. Refusing to push extra local history."
 }
 
 git commit --allow-empty -m "Trigger Codex PR review after billing update"
-git push origin HEAD:codex/test-pr-workflow
-git fetch origin codex/test-pr-workflow
+git push origin "HEAD:$TargetBranch"
+if ($LASTEXITCODE -ne 0) {
+    git reset --hard HEAD~1
+    throw "Push failed. Rolled back the empty trigger commit so the helper can be retried."
+}
+git fetch origin $TargetBranch
 
 function Get-ActionsUrlFromRemote {
     param([Parameter(Mandatory = $true)][string] $RemoteUrl)

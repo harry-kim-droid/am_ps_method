@@ -97,8 +97,14 @@ What to check:
 5. Confirm a useful PR comment appears.
 6. Save the run URL and PR comment URL as pilot evidence.
 
-After fixing OpenAI billing or quota, trigger a fresh run from the test branch:
+After fixing OpenAI billing or quota, trigger a fresh run from the checked-out test PR branch:
 
 ```powershell
 .\scripts\trigger-codex-review-test.ps1
+```
+
+The helper uses the current branch by default. To require a specific branch name, pass `-TargetBranch`:
+
+```powershell
+.\scripts\trigger-codex-review-test.ps1 -TargetBranch "pilot/codex-review-test"
 ```

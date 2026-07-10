@@ -1,0 +1,37 @@
+name: 구매 문의 / 출시 알림
+description: Codex 셀프 코드리뷰 자동화 키트 구매 또는 출시 알림을 요청합니다.
+title: "[구매 문의] "
+labels: ["purchase-lead"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        관심 가져주셔서 감사합니다. 공개 Issue에는 이메일, API 키, 결제정보 같은 개인정보를 적지 마세요.
+        정식 결제 링크가 준비되면 이 Issue 댓글로 안내합니다.
+  - type: dropdown
+    id: intent
+    attributes:
+      label: 문의 목적
+      options:
+        - 출시 알림을 받고 싶습니다
+        - 29,000원에 구매하고 싶습니다
+        - 설치 대행도 상담하고 싶습니다
+    validations:
+      required: true
+  - type: dropdown
+    id: repo
+    attributes:
+      label: 사용할 저장소
+      options:
+        - 개인 비공개 저장소
+        - 개인 공개 저장소
+        - 소규모 팀 저장소
+        - 아직 정하지 않음
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: 확인하고 싶은 점
+      description: 공개해도 되는 내용만 작성해 주세요.
+      placeholder: 지원 언어, GitHub 설정, 운영 방식 등에 대한 질문

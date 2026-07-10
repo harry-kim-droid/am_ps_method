@@ -1,0 +1,2 @@
+company,contact_name,contact_channel,relationship,status,last_contact,next_action,repo_fit,weekly_pr_estimate,pain_signal,sample_review_offered,sample_review_sent,pilot_ask_made,pilot_result,notes
+Example SaaS,Jane,email,warm,not_contacted,,,,,uses GitHub PRs,false,false,false,,

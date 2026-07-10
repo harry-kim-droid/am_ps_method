@@ -2,7 +2,7 @@
 
 ## Target List
 
-Start with 30 teams:
+Start with 30 teams and track them in `templates/prospect-tracker.csv`:
 
 - Startup founders you know
 - Freelance agencies
@@ -64,3 +64,5 @@ If the sample review is useful, suggest:
 - clear success review at the end
 
 Do not push for a subscription before the customer has seen concrete findings.
+
+Use `docs/pilot-proposal.md` only after the customer has reacted positively to a sample review or discovery call.

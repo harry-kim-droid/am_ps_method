@@ -64,7 +64,10 @@ Team:
 - [docs/operations-playbook.md](docs/operations-playbook.md): weekly operating process
 - [docs/troubleshooting.md](docs/troubleshooting.md): GitHub Actions, quota, and setup failure guide
 - [docs/outreach-script.md](docs/outreach-script.md): messages for finding pilot customers
+- [docs/first-pilot-sales-plan.md](docs/first-pilot-sales-plan.md): 7-day plan for getting the first pilot
+- [docs/pilot-proposal.md](docs/pilot-proposal.md): customer-facing pilot proposal
 - [docs/unit-economics.md](docs/unit-economics.md): pricing, time budget, and margin guardrails
+- [templates/prospect-tracker.csv](templates/prospect-tracker.csv): simple lead and pilot tracking sheet
 - [scripts/install-codex-review-kit.ps1](scripts/install-codex-review-kit.ps1): installer for copying workflow files into a customer repo
 - [scripts/trigger-codex-review-test.ps1](scripts/trigger-codex-review-test.ps1): helper to rerun the test PR workflow after billing fixes
 - [templates/pr-review-prompt.md](templates/pr-review-prompt.md): Codex PR review prompt
@@ -76,11 +79,13 @@ Team:
 ## First 14 Days
 
 1. Pick one friendly customer or your own active repository.
-2. Install the GitHub Actions workflow in a test branch using [docs/install-guide.md](docs/install-guide.md).
-3. Run PR reviews for one week and manually verify every Codex finding.
-4. Produce the first weekly technical debt report.
-5. Ask the customer which findings saved time or avoided risk.
-6. Convert the pilot into a monthly plan using the pricing above.
+2. Build a 30-prospect list using [templates/prospect-tracker.csv](templates/prospect-tracker.csv).
+3. Send the first 10 messages from [docs/outreach-script.md](docs/outreach-script.md).
+4. Install the GitHub Actions workflow in a test branch using [docs/install-guide.md](docs/install-guide.md).
+5. Run PR reviews for one week and manually verify every Codex finding.
+6. Produce the first weekly technical debt report.
+7. Ask the customer which findings saved time or avoided risk.
+8. Convert the pilot into a monthly plan using [docs/pilot-proposal.md](docs/pilot-proposal.md).
 
 ## Safety Rules
 

@@ -3,7 +3,7 @@
 ## 주간 루프
 
 1. Search Console과 판매처에서 노출, 방문, 샘플 다운로드, 결제 클릭, 구매를 확인한다.
-2. `metrics/funnel-snapshots.csv`에 자동 기록된 방문, 샘플 다운로드, 구매 문의를 확인한다.
+2. `metrics/funnel-snapshots.csv`에 자동 기록된 샘플 다운로드와 구매 문의를 확인한다. 사이트 방문 수는 분석 서비스를 연결한 뒤 별도로 기록한다.
 3. 검색 의도와 고객 질문을 바탕으로 `content/briefs/`에 YAML 브리프를 만든다.
 4. `Draft reviewed content`를 수동 실행한다.
 5. 생성 PR에서 모든 URL, 명령, 가격, 정책, 모델명을 직접 확인한다.

@@ -4,6 +4,6 @@ export const site = {
   productName: 'Codex 셀프 코드리뷰 자동화 키트',
   checkoutUrl: import.meta.env.PUBLIC_CHECKOUT_URL || 'https://github.com/harry-kim-droid/am_ps_method/issues/new?template=purchase.yml',
   checkoutReady: Boolean(import.meta.env.PUBLIC_CHECKOUT_URL),
-  sampleUrl: import.meta.env.PUBLIC_SAMPLE_URL || '/sample/',
+  sampleUrl: import.meta.env.PUBLIC_SAMPLE_URL || 'https://github.com/harry-kim-droid/am_ps_method/releases/download/v1.0.0/codex-review-free-sample.zip',
   analyticsDomain: import.meta.env.PUBLIC_ANALYTICS_DOMAIN || '',
 };

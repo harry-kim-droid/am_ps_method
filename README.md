@@ -65,6 +65,7 @@ Team:
 - [docs/troubleshooting.md](docs/troubleshooting.md): GitHub Actions, quota, and setup failure guide
 - [docs/outreach-script.md](docs/outreach-script.md): messages for finding pilot customers
 - [docs/first-pilot-sales-plan.md](docs/first-pilot-sales-plan.md): 7-day plan for getting the first pilot
+- [docs/prospecting-sources.md](docs/prospecting-sources.md): places and filters for building the first 30-prospect list
 - [docs/pilot-proposal.md](docs/pilot-proposal.md): customer-facing pilot proposal
 - [docs/unit-economics.md](docs/unit-economics.md): pricing, time budget, and margin guardrails
 - [templates/prospect-tracker.csv](templates/prospect-tracker.csv): simple lead and pilot tracking sheet
@@ -80,12 +81,13 @@ Team:
 
 1. Pick one friendly customer or your own active repository.
 2. Build a 30-prospect list using [templates/prospect-tracker.csv](templates/prospect-tracker.csv).
-3. Send the first 10 messages from [docs/outreach-script.md](docs/outreach-script.md).
-4. Install the GitHub Actions workflow in a test branch using [docs/install-guide.md](docs/install-guide.md).
-5. Run PR reviews for one week and manually verify every Codex finding.
-6. Produce the first weekly technical debt report.
-7. Ask the customer which findings saved time or avoided risk.
-8. Convert the pilot into a monthly plan using [docs/pilot-proposal.md](docs/pilot-proposal.md).
+3. Use [docs/prospecting-sources.md](docs/prospecting-sources.md) to prioritize prospects scoring 6 or higher.
+4. Send the first 10 messages from [docs/outreach-script.md](docs/outreach-script.md).
+5. Install the GitHub Actions workflow in a test branch using [docs/install-guide.md](docs/install-guide.md).
+6. Run PR reviews for one week and manually verify every Codex finding.
+7. Produce the first weekly technical debt report.
+8. Ask the customer which findings saved time or avoided risk.
+9. Convert the pilot into a monthly plan using [docs/pilot-proposal.md](docs/pilot-proposal.md).
 
 ## Safety Rules
 

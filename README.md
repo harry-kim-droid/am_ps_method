@@ -1,99 +1,49 @@
-# Codex PR Review and Tech Debt Reporting Service
+# Codex 셀프 코드리뷰 자동화 키트
 
-Small-team product package for selling a Codex-based automation service:
+한국 1인 개발자에게 판매할 디지털 상품, 무료 샘플, Astro SEO 블로그, Codex 콘텐츠 초안 워크플로를 한 저장소에서 운영합니다.
 
-- Automated pull request review for small development teams
-- Weekly technical debt report
-- Customer onboarding checklist
-- GitHub Actions workflow starter
-- Codex prompts for repeatable review and reporting
+## 로컬 실행
 
-This repository is meant to become a sellable service kit, not only a demo. The first commercial version should be operated as a human-reviewed automation service: Codex drafts the findings, and the service owner verifies the output before sending it to customers.
+```powershell
+npm install
+npm run dev
+```
 
-## Target Customer
+정적 빌드와 상품 패키지:
 
-Small software teams with 1-10 engineers who:
+```powershell
+npm run build
+npm run package:product
+powershell -ExecutionPolicy Bypass -File scripts/test-package.ps1
+```
 
-- Ship through GitHub pull requests
-- Do not have enough senior review capacity
-- Want faster feedback on bugs, tests, maintainability, and release risk
-- Need a weekly view of technical debt without running a formal platform team
+결과물:
 
-## Offer
+- `dist/`: 배포할 Astro 사이트
+- `product-dist/codex-self-review-kit-v1.0.0.zip`: Lemon Squeezy에 올릴 유료 상품
+- `public/downloads/codex-review-free-sample.zip`: 사이트에서 제공할 무료 샘플
 
-**Codex Review Desk for Small Teams**
+## 출시 설정
 
-What the customer gets:
+1. Lemon Squeezy에서 상품을 만들고 유료 ZIP을 업로드합니다.
+2. GitHub 저장소 변수 `PUBLIC_CHECKOUT_URL`에 checkout URL을 설정합니다.
+3. `src/pages/policy.astro`의 TODO를 실제 판매자 정보로 교체합니다.
+4. 저장소 Settings → Pages에서 GitHub Actions 배포를 활성화합니다.
+5. 필요할 때 `PUBLIC_ANALYTICS_DOMAIN`을 설정합니다.
 
-- PR review summary on every selected pull request
-- Risk-focused comments covering bugs, tests, security, compatibility, and maintainability
-- Weekly technical debt report with ranked action items
-- Optional small fix PRs for low-risk issues
-- Monthly process review to tune prompts and review criteria
+## 콘텐츠 검수 흐름
 
-## Recommended Pricing
+1. `content/briefs/`에 YAML 브리프를 추가합니다.
+2. GitHub Actions의 `Draft reviewed content`를 실행합니다.
+3. Codex가 `status: review` 초안을 담은 PR을 엽니다.
+4. 사람이 근거와 문장을 검수하고 `status: published`로 바꿉니다.
+5. 기본 브랜치 병합 후 사이트가 자동 배포됩니다.
 
-Pilot:
+자세한 주간 운영과 지표 정의는 [docs/content-operations.md](docs/content-operations.md)를 참고하세요.
 
-- 1 repository
-- 2 weeks
-- Up to 20 pull requests
-- One weekly technical debt report
-- Price: free to KRW 300,000 depending on customer warmth
+## 안전 원칙
 
-Starter:
-
-- 1-2 repositories
-- Up to 50 PRs/month
-- Weekly report
-- Price: KRW 300,000-700,000/month
-
-Team:
-
-- 3-5 repositories
-- Up to 150 PRs/month
-- Weekly report plus monthly review call
-- Price: KRW 900,000-2,000,000/month
-
-## Repository Contents
-
-- [docs/service-blueprint.md](docs/service-blueprint.md): full service definition
-- [docs/sales-one-pager.md](docs/sales-one-pager.md): customer-facing sales sheet
-- [docs/install-guide.md](docs/install-guide.md): customer repository installation guide
-- [docs/onboarding-checklist.md](docs/onboarding-checklist.md): setup checklist
-- [docs/operations-playbook.md](docs/operations-playbook.md): weekly operating process
-- [docs/troubleshooting.md](docs/troubleshooting.md): GitHub Actions, quota, and setup failure guide
-- [docs/outreach-script.md](docs/outreach-script.md): messages for finding pilot customers
-- [docs/first-pilot-sales-plan.md](docs/first-pilot-sales-plan.md): 7-day plan for getting the first pilot
-- [docs/prospecting-sources.md](docs/prospecting-sources.md): places and filters for building the first 30-prospect list
-- [docs/pilot-proposal.md](docs/pilot-proposal.md): customer-facing pilot proposal
-- [docs/objection-handling.md](docs/objection-handling.md): honest responses to pricing, security, and AI quality objections
-- [docs/unit-economics.md](docs/unit-economics.md): pricing, time budget, and margin guardrails
-- [templates/prospect-tracker.csv](templates/prospect-tracker.csv): simple lead and pilot tracking sheet
-- [scripts/install-codex-review-kit.ps1](scripts/install-codex-review-kit.ps1): installer for copying workflow files into a customer repo
-- [scripts/trigger-codex-review-test.ps1](scripts/trigger-codex-review-test.ps1): helper to rerun the test PR workflow after billing fixes
-- [templates/pr-review-prompt.md](templates/pr-review-prompt.md): Codex PR review prompt
-- [templates/weekly-tech-debt-prompt.md](templates/weekly-tech-debt-prompt.md): Codex weekly report prompt
-- [templates/weekly-tech-debt-report.md](templates/weekly-tech-debt-report.md): report template
-- [.github/workflows/codex-pr-review.yml](.github/workflows/codex-pr-review.yml): GitHub Actions starter workflow
-- [.github/workflows/codex-weekly-tech-debt.yml](.github/workflows/codex-weekly-tech-debt.yml): weekly report workflow
-
-## First 14 Days
-
-1. Pick one friendly customer or your own active repository.
-2. Build a 30-prospect list using [templates/prospect-tracker.csv](templates/prospect-tracker.csv).
-3. Use [docs/prospecting-sources.md](docs/prospecting-sources.md) to prioritize prospects scoring 6 or higher.
-4. Send the first 10 messages from [docs/outreach-script.md](docs/outreach-script.md).
-5. Install the GitHub Actions workflow in a test branch using [docs/install-guide.md](docs/install-guide.md).
-6. Run PR reviews for one week and manually verify every Codex finding.
-7. Produce the first weekly technical debt report.
-8. Ask the customer which findings saved time or avoided risk.
-9. Convert the pilot into a monthly plan using [docs/pilot-proposal.md](docs/pilot-proposal.md).
-
-## Safety Rules
-
-- Do not sell this as fully autonomous engineering.
-- Keep a human approval step for customer-visible findings.
-- Avoid secrets, private customer data, or production credentials in prompts.
-- Start in read-only review mode before enabling automatic patch generation.
-- Keep all output traceable to commits, files, and pull request numbers.
+- 고객 API 키를 사용하고 GitHub Secret에만 저장합니다.
+- 리뷰 실행은 `contents: read`, `sandbox: read-only`가 기본입니다.
+- 콘텐츠와 코드리뷰 모두 사람이 확인하기 전에는 고객에게 확정 정보로 제공하지 않습니다.
+- 자동 코드 수정, 완전한 버그 탐지, 보안 감사 대체를 약속하지 않습니다.

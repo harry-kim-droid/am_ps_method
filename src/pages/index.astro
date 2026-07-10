@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const posts=(await getCollection('blog',({data})=>data.status==='published')).sort((a,b)=>b.data.publishedAt.valueOf()-a.data.publishedAt.valueOf()).slice(0,3);
+---
+<Base title="리뷰 워크벤치 | 혼자 개발해도 코드리뷰는 빠뜨리지 않게">
+  <section class="hero">
+    <div><span class="eyebrow">CODEX REVIEW SYSTEM / FOR SOLO BUILDERS</span><h1>혼자 개발해도<br /><em>두 번째 시선</em>은<br />자동으로.</h1><p>PR을 열면 Codex가 버그, 누락된 테스트, 배포 위험을 먼저 훑습니다. 읽기 전용으로 시작하고 필요한 피드백만 남기는 실전 자동화 키트입니다.</p><div class="actions"><a class="button" href="product/">키트 구성 보기</a><a class="button secondary" href="sample/">무료 프롬프트 받기</a></div></div>
+    <div class="diff-card" aria-label="Codex 리뷰 결과 예시"><div class="diff-head"><span>checkout.ts</span><span>PR #42</span></div><div class="diff-body"><span class="minus">- await charge(order.total)</span>
+<span class="plus">+ await charge(order.total, idempotencyKey)</span>
+
+<strong>[P1] 중복 결제 가능성</strong>
+네트워크 재시도 시 같은 주문이 두 번 결제될 수 있습니다.
+
+Suggested test:
+동일 키로 2회 요청해 결제가 1번인지 확인</div></div>
+  </section>
+  <div class="strip"><div class="strip-inner"><article><strong>READ ONLY</strong>코드를 바꾸지 않고 검토부터</article><article><strong>30 MIN</strong>README를 따라 설치하는 목표 시간</article><article><strong>HUMAN CHECK</strong>AI 결과는 사람이 최종 판단</article></div></div>
+  <section class="section"><div class="section-head"><div><span class="eyebrow">WHAT YOU GET</span><h2>반복되는 검토를<br />작업 흐름으로 만드세요.</h2></div><p>막연한 “코드 봐줘” 대신, 무엇을 찾고 어떻게 보고할지 이미 정리되어 있습니다.</p></div><div class="cards"><article class="card"><code>ON: PULL_REQUEST</code><h3>자동 PR 리뷰</h3><p>새 PR과 변경된 PR에서 행동 버그, 테스트 공백, 호환성 위험을 확인합니다.</p></article><article class="card"><code>MON 09:00</code><h3>주간 기술부채</h3><p>최근 변경과 TODO를 모아 이번 주에 처리할 항목부터 순위를 정합니다.</p></article><article class="card"><code>SANDBOX: READ-ONLY</code><h3>안전한 기본값</h3><p>고객의 API 키와 최소 GitHub 권한을 사용하며 자동 수정은 하지 않습니다.</p></article></div></section>
+  <section class="section"><div class="section-head"><div><span class="eyebrow">SETUP FLOW</span><h2>세 단계면 시작합니다.</h2></div></div><div class="steps"><article class="step"><h3>파일 설치</h3><p>PowerShell 설치 스크립트로 워크플로와 프롬프트를 복사합니다.</p></article><article class="step"><h3>API 키 등록</h3><p>GitHub 저장소 Secret에 본인의 OpenAI API 키를 등록합니다.</p></article><article class="step"><h3>테스트 PR 열기</h3><p>샘플 변경으로 결과를 확인하고 팀 기준에 맞게 프롬프트를 조정합니다.</p></article></div></section>
+  <section class="section"><div class="price-box"><div><span class="eyebrow">LAUNCH PRICE</span><h2>Codex 셀프 코드리뷰<br />자동화 키트</h2><p class="price">₩29,000 <del>₩39,000</del></p><a class="button" href="product/">구성과 주의사항 확인</a></div><ul class="checklist"><li>PR 리뷰 GitHub Actions</li><li>주간 기술부채 리포트</li><li>고신호 리뷰 프롬프트 2종</li><li>설치·비용·보안·문제 해결 가이드</li><li>초기 버전 업데이트</li></ul></div></section>
+  <section class="section"><div class="section-head"><div><span class="eyebrow">FIELD NOTES</span><h2>자동화 전에 읽을 것</h2></div><a href="blog/">전체 가이드 →</a></div><div class="cards">{posts.map(post=><a class="card" href={`blog/${post.id}/`}><span class="tag">{post.data.keywords[0]}</span><h3>{post.data.title}</h3><p>{post.data.description}</p></a>)}</div></section>
+</Base>

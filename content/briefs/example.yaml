@@ -1,0 +1,10 @@
+slug: codex-review-checklist
+topic: Codex PR 리뷰를 처음 도입할 때 확인할 체크리스트
+primary_keyword: Codex 코드리뷰 체크리스트
+search_intent: 설치 전에 필요한 권한, 비용, 보안 조건을 확인하려는 정보 탐색
+reader_problem: 자동 리뷰를 켰다가 과도한 권한이나 API 비용 문제가 생길까 걱정한다
+product_link: sample
+evidence_urls:
+  - https://github.com/openai/codex-action
+  - https://platform.openai.com/docs/pricing
+status: queued

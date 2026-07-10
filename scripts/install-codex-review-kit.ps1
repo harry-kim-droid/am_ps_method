@@ -9,7 +9,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-$sourceRoot = Resolve-Path -LiteralPath (Join-Path $PSScriptRoot "..")
+$sourceRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot "..")).Path
 $targetRoot = Resolve-Path -LiteralPath $TargetRepo
 
 $requiredSourceFiles = @(
@@ -18,6 +18,7 @@ $requiredSourceFiles = @(
     ".github/codex/prompts/pr-review.md",
     ".github/codex/prompts/weekly-tech-debt.md",
     "docs/troubleshooting.md",
+    "docs/cost-and-security.md",
     "scripts/trigger-codex-review-test.ps1"
 )
 

@@ -1,0 +1,67 @@
+name: Draft reviewed content
+
+on:
+  workflow_dispatch:
+    inputs:
+      brief:
+        description: "Brief path under content/briefs (example.yaml)"
+        required: true
+        default: "example.yaml"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    outputs:
+      branch: ${{ steps.names.outputs.branch }}
+      brief_path: ${{ steps.names.outputs.brief_path }}
+    steps:
+      - uses: actions/checkout@v5
+      - id: names
+        env:
+          BRIEF: ${{ inputs.brief }}
+        run: |
+          if [[ ! "$BRIEF" =~ ^[a-zA-Z0-9._-]+\.ya?ml$ ]]; then exit 1; fi
+          test -f "content/briefs/$BRIEF"
+          echo "branch=content/codex-${BRIEF%.*}-${GITHUB_RUN_ID}" >> "$GITHUB_OUTPUT"
+          echo "brief_path=content/briefs/$BRIEF" >> "$GITHUB_OUTPUT"
+
+  draft:
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v5
+        with: { fetch-depth: 0 }
+      - name: Create draft with Codex
+        uses: openai/codex-action@v1
+        with:
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          model: ${{ vars.CODEX_MODEL || 'gpt-5.4-mini' }}
+          prompt: |
+            Follow .github/codex/prompts/content-draft.md.
+            Read the brief at ${{ needs.validate.outputs.brief_path }} and create the requested draft.
+          sandbox: workspace-write
+      - name: Verify review gate
+        env:
+          BRIEF_PATH: ${{ needs.validate.outputs.brief_path }}
+        run: |
+          slug=$(sed -n 's/^slug:[[:space:]]*//p' "$BRIEF_PATH" | tr -d '"' | head -1)
+          test -n "$slug"
+          test -f "src/content/blog/$slug.md"
+          grep -Eq '^status:[[:space:]]*(review|"review")' "src/content/blog/$slug.md"
+          if grep -Eq '^status:[[:space:]]*(published|"published")' "src/content/blog/$slug.md"; then exit 1; fi
+      - name: Open review PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: ${{ needs.validate.outputs.branch }}
+          BRIEF_PATH: ${{ needs.validate.outputs.brief_path }}
+        run: |
+          git config user.name "codex-content-bot"
+          git config user.email "codex-content-bot@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add src/content/blog content/briefs
+          git commit -m "Draft content from $BRIEF_PATH"
+          git push origin "$BRANCH"
+          gh pr create --base "${{ github.event.repository.default_branch }}" --head "$BRANCH" --title "검수 요청: Codex 콘텐츠 초안" --body "자동 생성된 초안입니다. 사실 확인 후 frontmatter의 status를 published로 바꿔 병합하세요."

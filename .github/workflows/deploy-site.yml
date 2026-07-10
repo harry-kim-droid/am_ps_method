@@ -25,7 +25,6 @@ jobs:
           SITE_URL: https://${{ github.repository_owner }}.github.io
           BASE_PATH: /${{ github.event.repository.name }}
           PUBLIC_CHECKOUT_URL: ${{ vars.PUBLIC_CHECKOUT_URL }}
-          PUBLIC_SAMPLE_URL: /${{ github.event.repository.name }}/sample/
           PUBLIC_ANALYTICS_DOMAIN: ${{ vars.PUBLIC_ANALYTICS_DOMAIN }}
       - uses: actions/upload-pages-artifact@v3
         with: { path: dist }

@@ -1,0 +1,49 @@
+name: Snapshot revenue funnel
+
+on:
+  schedule:
+    - cron: "15 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: read
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Collect GitHub funnel signals
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const [{ data: traffic }, { data: release }, { data: leads }] = await Promise.all([
+              github.rest.repos.getViews({ owner, repo, per: 'day' }),
+              github.rest.repos.getReleaseByTag({ owner, repo, tag: 'v1.0.0' }),
+              github.rest.issues.listForRepo({ owner, repo, labels: 'purchase-lead', state: 'all', per_page: 100 }),
+            ]);
+            const sample = release.assets.find(asset => asset.name === 'codex-review-free-sample.zip');
+            const leadCount = leads.filter(issue => !issue.pull_request).length;
+            const row = [new Date().toISOString(), traffic.count, traffic.uniques,
+              sample?.download_count ?? 0, leadCount, 0, 0, 'automated GitHub snapshot'].join(',');
+            fs.appendFileSync('metrics/funnel-snapshots.csv', `${row}\n`);
+            await core.summary.addHeading('Revenue funnel snapshot').addTable([
+              [{ data: 'Signal', header: true }, { data: 'Value', header: true }],
+              ['Repository views (14d)', String(traffic.count)],
+              ['Unique visitors (14d)', String(traffic.uniques)],
+              ['Free sample downloads', String(sample?.download_count ?? 0)],
+              ['Purchase leads', String(leadCount)],
+            ]).write();
+      - name: Commit snapshot
+        run: |
+          git config user.name "revenue-funnel-bot"
+          git config user.email "revenue-funnel-bot@users.noreply.github.com"
+          git add metrics/funnel-snapshots.csv
+          git commit -m "Record daily funnel snapshot"
+          git push

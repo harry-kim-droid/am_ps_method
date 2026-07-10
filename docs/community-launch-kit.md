@@ -53,4 +53,4 @@ https://harry-kim-droid.github.io/am_ps_method/
 
 ## 배포 후 기록
 
-각 게시물의 채널, 게시 URL, 날짜, 24시간 방문 수, 샘플 다운로드, 구매 문의를 `metrics/weekly-funnel.csv`의 notes에 기록한다.
+각 게시물의 채널, 게시 URL, 날짜, 24시간 방문 수, 샘플 다운로드, 구매 문의를 `metrics/funnel-snapshots.csv`의 notes에 기록한다.

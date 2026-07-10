@@ -67,6 +67,7 @@ Team:
 - [docs/first-pilot-sales-plan.md](docs/first-pilot-sales-plan.md): 7-day plan for getting the first pilot
 - [docs/prospecting-sources.md](docs/prospecting-sources.md): places and filters for building the first 30-prospect list
 - [docs/pilot-proposal.md](docs/pilot-proposal.md): customer-facing pilot proposal
+- [docs/objection-handling.md](docs/objection-handling.md): honest responses to pricing, security, and AI quality objections
 - [docs/unit-economics.md](docs/unit-economics.md): pricing, time budget, and margin guardrails
 - [templates/prospect-tracker.csv](templates/prospect-tracker.csv): simple lead and pilot tracking sheet
 - [scripts/install-codex-review-kit.ps1](scripts/install-codex-review-kit.ps1): installer for copying workflow files into a customer repo
